@@ -10,5 +10,5 @@ phases:
         - echo Build completed successfully
 artefacts:
   files:
-    - target/demo.jar
+    - '**/*'
   discard-paths: yes
