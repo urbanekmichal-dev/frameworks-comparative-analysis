@@ -1,12 +1,11 @@
 package com.urbanek.demo.crud.dto;
 
 import lombok.Data;
-import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.UUID;
 
 @Data
-public class TaskDtoCreateResponse {
+public class TaskDtoResponse {
     private UUID taskId;
     private String name;
     private String description;
