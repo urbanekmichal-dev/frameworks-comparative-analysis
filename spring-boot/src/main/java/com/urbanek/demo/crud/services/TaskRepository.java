@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface TaskRepository extends R2dbcRepository<TaskEntity, UUID> {
 
     Mono<TaskEntity> findByTaskId(UUID taskId);
+    Mono<Void> deleteByTaskId(UUID taskId);
 }
