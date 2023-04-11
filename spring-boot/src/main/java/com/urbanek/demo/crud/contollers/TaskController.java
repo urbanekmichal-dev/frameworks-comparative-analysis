@@ -20,13 +20,14 @@ import java.util.UUID;
 public class TaskController {
 
     private final TaskService taskService;
-    @PostMapping("/")
-    public Mono<ResponseEntity<TaskDtoResponse>> addTask(@RequestBody final TaskDtoRequest taskDtoRequest){
-        return taskService.addTask(taskDtoRequest)
-                .map(ResponseEntity::ok);
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<TaskDtoResponse> addTask(@RequestBody final TaskDtoRequest taskDtoRequest){
+        return taskService.addTask(taskDtoRequest);
+
     }
 
-    @GetMapping ("/")
+    @GetMapping ("")
     public Flux<TaskDtoResponse> getAllTasks(){
         return taskService.getTasks();
 
