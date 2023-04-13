@@ -1,11 +1,17 @@
 package com.urbanek.demo.sort.service.sortingAlgorithms;
 
+import com.urbanek.demo.sort.enums.SortStrategy;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BubbleSortService {
+public class BubbleSortService implements Sort{
 
-    public void sort(int[] arr) {
+    @Override
+    public SortStrategy getStrategy() {
+        return SortStrategy.BUBBLE_SORT;
+    }
+
+    public int [] sort(int[] arr) {
         int n = arr.length;
         int temp = 0;
         for (int i = 0; i < n; i++) {
@@ -18,5 +24,6 @@ public class BubbleSortService {
                 }
             }
         }
+        return arr;
     }
 }
