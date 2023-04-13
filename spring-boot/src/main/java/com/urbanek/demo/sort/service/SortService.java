@@ -2,14 +2,17 @@ package com.urbanek.demo.sort.service;
 
 import com.urbanek.demo.sort.dto.ListDtoRequest;
 import com.urbanek.demo.sort.dto.ListDtoResponse;
-import com.urbanek.demo.sort.service.sortingAlgorithms.BubbleSortService;
-import com.urbanek.demo.sort.service.sortingAlgorithms.QuickSortService;
+import com.urbanek.demo.sort.enums.SortStrategy;
+import com.urbanek.demo.sort.enums.SortType;
+import com.urbanek.demo.sort.service.sortingAlgorithms.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,22 +21,31 @@ public class SortService {
 
     private final QuickSortService quickSortService;
     private final BubbleSortService bubbleSortService;
+    private final SelectionSortService selectionSortService;
+    private final MergeSortService mergeSortService;
+    private final SortConverter sortConverter;
+
     public Mono<ListDtoResponse> quickSort(final ListDtoRequest listDtoRequest){
-        int [] numbersArray = listDtoRequest.getIntegerList().stream().mapToInt(Integer::intValue).toArray();
-        int n = numbersArray.length;
-        quickSortService.sort(numbersArray,0,n-1);
-        List<Integer> sortedList = Arrays.stream(numbersArray).boxed().toList();
-        ListDtoResponse listDtoResponse = new ListDtoResponse();
-        listDtoResponse.setIntegerList(sortedList);
-        return Mono.just(listDtoResponse);
+        int [] numbersArray = this.sortConverter.listDtoRequestToIntArray(listDtoRequest);
+        this.quickSortService.sort(numbersArray);
+        return Mono.just(this.sortConverter.intArrayToListDtoResponse(numbersArray));
     }
 
     public Mono<ListDtoResponse> bubbleSort(final ListDtoRequest listDtoRequest){
-        int [] numbersArray = listDtoRequest.getIntegerList().stream().mapToInt(Integer::intValue).toArray();
-        bubbleSortService.sort(numbersArray);
-        List<Integer> sortedList = Arrays.stream(numbersArray).boxed().toList();
-        ListDtoResponse listDtoResponse = new ListDtoResponse();
-        listDtoResponse.setIntegerList(sortedList);
-        return Mono.just(listDtoResponse);
+        int [] numbersArray = this.sortConverter.listDtoRequestToIntArray(listDtoRequest);
+        this.bubbleSortService.sort(numbersArray);
+        return Mono.just(this.sortConverter.intArrayToListDtoResponse(numbersArray));
+    }
+
+    public Mono<ListDtoResponse> selectionSort(final ListDtoRequest listDtoRequest){
+        int [] numbersArray = this.sortConverter.listDtoRequestToIntArray(listDtoRequest);
+        this.selectionSortService.sort(numbersArray);
+        return Mono.just(this.sortConverter.intArrayToListDtoResponse(numbersArray));
+    }
+
+    public Mono<ListDtoResponse> mergeSort(final ListDtoRequest listDtoRequest){
+        int [] numbersArray = this.sortConverter.listDtoRequestToIntArray(listDtoRequest);
+        this.mergeSortService.sort(numbersArray);
+        return Mono.just(this.sortConverter.intArrayToListDtoResponse(numbersArray));
     }
 }

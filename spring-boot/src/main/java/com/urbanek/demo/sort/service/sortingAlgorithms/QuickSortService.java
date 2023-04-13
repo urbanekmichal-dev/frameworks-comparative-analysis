@@ -1,16 +1,42 @@
 package com.urbanek.demo.sort.service.sortingAlgorithms;
 
+import com.urbanek.demo.sort.enums.SortStrategy;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuickSortService {
-    /* This function takes last element as pivot,
-     places the pivot element at its correct
-     position in sorted array, and places all
-     smaller (smaller than pivot) to left of
-     pivot and all greater elements to right
-     of pivot */
-    int partition(int arr[], int low, int high)
+public class QuickSortService implements Sort{
+
+    @Override
+    public SortStrategy getStrategy() {
+        return SortStrategy.QUICK_SORT;
+    }
+
+    @Override
+    public int[] sort(int[] inputArray) {
+        int n = inputArray.length;
+        this.sort(inputArray,0,n-1);
+        return inputArray;
+    }
+
+    /* The main function that implements QuickSort()
+    arr[] --> Array to be sorted,
+    low  --> Starting index,
+    high  --> Ending index */
+    private void sort(int arr[], int low, int high)
+    {
+        if (low < high)
+        {
+            /* pi is partitioning index, arr[pi] is
+              now at right place */
+            int pi = partition(arr, low, high);
+
+            // Recursively sort elements before
+            // partition and after partition
+            sort(arr, low, pi-1);
+            sort(arr, pi+1, high);
+        }
+    }
+    private int partition(int arr[], int low, int high)
     {
         int pivot = arr[high];
         int i = (low-1); // index of smaller element
@@ -35,34 +61,5 @@ public class QuickSortService {
         arr[high] = temp;
 
         return i+1;
-    }
-
-
-    /* The main function that implements QuickSort()
-      arr[] --> Array to be sorted,
-      low  --> Starting index,
-      high  --> Ending index */
-   public void sort(int arr[], int low, int high)
-    {
-        if (low < high)
-        {
-            /* pi is partitioning index, arr[pi] is
-              now at right place */
-            int pi = partition(arr, low, high);
-
-            // Recursively sort elements before
-            // partition and after partition
-            sort(arr, low, pi-1);
-            sort(arr, pi+1, high);
-        }
-    }
-
-    /* A utility function to print array of size n */
-    static void printArray(int arr[])
-    {
-        int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
-        System.out.println();
     }
 }

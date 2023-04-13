@@ -3,7 +3,6 @@ package com.urbanek.demo.crud.services;
 import com.urbanek.demo.crud.dto.TaskDtoRequest;
 import com.urbanek.demo.crud.dto.TaskDtoResponse;
 import com.urbanek.demo.crud.entity.TaskEntity;
-import com.urbanek.demo.crud.services.converters.TaskConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

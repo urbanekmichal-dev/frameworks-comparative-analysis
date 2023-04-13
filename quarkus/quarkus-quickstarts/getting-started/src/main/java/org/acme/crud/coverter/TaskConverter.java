@@ -1,18 +1,19 @@
-package com.urbanek.demo.crud.services.converters;
+package org.acme.crud.coverter;
 
-import com.urbanek.demo.crud.dto.TaskDtoRequest;
-import com.urbanek.demo.crud.dto.TaskDtoResponse;
-import com.urbanek.demo.crud.entity.TaskEntity;
-import org.springframework.stereotype.Component;
+import org.acme.crud.dto.TaskDtoRequest;
+import org.acme.crud.dto.TaskDtoResponse;
+import org.acme.crud.entity.TaskEntity;
 
-@Component
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class TaskConverter {
     public TaskDtoResponse convertTaskEntityToTaskDtoResponse(final TaskEntity source){
-        final TaskDtoResponse taskDtoRequest = new TaskDtoResponse();
-        taskDtoRequest.setTaskId(source.getTaskId());
-        taskDtoRequest.setName(source.getName());
-        taskDtoRequest.setDescription(source.getDescription());
-        return taskDtoRequest;
+        final TaskDtoResponse taskDtoResponse = new TaskDtoResponse();
+        taskDtoResponse.setId(source.getId());
+        taskDtoResponse.setName(source.getName());
+        taskDtoResponse.setDescription(source.getDescription());
+        return taskDtoResponse;
     }
     public TaskEntity convertTaskDtoRequestToTaskEntity(final TaskDtoRequest source){
         final TaskEntity taskEntity = new TaskEntity();
