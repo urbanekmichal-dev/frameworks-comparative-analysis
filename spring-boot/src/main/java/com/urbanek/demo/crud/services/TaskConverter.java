@@ -1,4 +1,4 @@
-package com.urbanek.demo.crud.services.converters;
+package com.urbanek.demo.crud.services;
 
 import com.urbanek.demo.crud.dto.TaskDtoRequest;
 import com.urbanek.demo.crud.dto.TaskDtoResponse;
