@@ -25,18 +25,10 @@ public class CryptoController {
                 .thenReturn("Text was encrypted and saved on the server");
     }
 
-    @PostMapping(value = "/encryptfile")
-    public Mono<String> encryptFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return cryptoService.encrypt(file.getBytes())
-                .doOnNext(encryptedBytes -> {
-                    try {
-                        Path encryptedFilePath = Paths.get("encrypted_" + file.getOriginalFilename());
-                        Files.write(encryptedFilePath, encryptedBytes);
-                    } catch (IOException e) {
-                        throw new RuntimeException("Could not write encrypted file", e);
-                    }
-                })
-                .thenReturn("File encrypted and saved as encrypted_" + file.getOriginalFilename());
+    @GetMapping(value = "/decryptFile/{fileName}", produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public Mono<String> decryptFile(@PathVariable String fileName) {
+        return cryptoService.decryptFile(fileName);
     }
 
 }
