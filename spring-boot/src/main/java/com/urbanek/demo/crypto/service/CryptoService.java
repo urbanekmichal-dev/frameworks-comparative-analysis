@@ -1,63 +1,56 @@
 package com.urbanek.demo.crypto.service;
 
-import com.urbanek.demo.crypto.dto.CryptoDtoRequest;
-import com.urbanek.demo.crypto.dto.CryptoDtoResponse;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 
 
 @Service
-@AllArgsConstructor
 public class CryptoService {
     private final CryptoConverter cryptoConverter;
+    private static final int RSA_KEY_SIZE = 2048;
+    private final RSAPrivateKey privateKey;
+    private final RSAPublicKey publicKey;
+    private static final String RSA_ALGORITHM = "RSA";
 
-    private static final String SECRET_KEY = "0123456789abcdef0123456789abcdef";
-    private static final String INIT_VECTOR = "abcdefghijklmnop";
+    public CryptoService(final CryptoConverter cryptoConverter) throws Exception {
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM);
+        keyPairGenerator.initialize(RSA_KEY_SIZE);
+        this.cryptoConverter=cryptoConverter;
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-    public Mono<CryptoDtoResponse> encrypt(final CryptoDtoRequest input) {
+        this.privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        this.publicKey = (RSAPublicKey) keyPair.getPublic();
+    }
 
+    public Mono<byte[]> encryptText(String text) {
         return Mono.fromCallable(() -> {
-            SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("UTF-8"), "AES");
-            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
-
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(Cipher.ENCRYPT_MODE, key, iv);
-
-            byte[] encrypted = cipher.doFinal(cryptoConverter.CryptoDtoRequestToString(input).getBytes());
-            return cryptoConverter.byteArrayToCryptoDtoResponse(encrypted);
+            byte[] textBytes = text.getBytes(StandardCharsets.UTF_8);
+            return encryptWithRSA(textBytes, publicKey);
         });
     }
 
-    public  Mono<CryptoDtoResponse> decrypt(final CryptoDtoRequest encrypted) {
+    public Mono<Void> saveEncryptedText(byte[] encryptedText) {
+        String savePath = "encrypted.txt";
         return Mono.fromCallable(() -> {
-            SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("UTF-8"), "AES");
-            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
-
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, key, iv);
-
-            byte[] original = cipher.doFinal(cryptoConverter.CryptoDtoRequestToString(encrypted).getBytes());
-            return cryptoConverter.byteArrayToCryptoDtoResponse(original);
+            Path filePath = Path.of(savePath);
+            Files.write(filePath, encryptedText);
+            return null;
         });
     }
 
-    public Mono<byte[]> encrypt(byte[] input) {
-        return Mono.fromCallable(() -> {
-            SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("UTF-8"), "AES");
-            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
+    private byte[] encryptWithRSA(byte[] data, RSAPublicKey publicKey) throws Exception {
+        javax.crypto.Cipher cipher = javax.crypto.Cipher.getInstance(RSA_ALGORITHM);
+        cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, publicKey);
+        return cipher.doFinal(data);
+    }
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.ENCRYPT_MODE, key, iv);
