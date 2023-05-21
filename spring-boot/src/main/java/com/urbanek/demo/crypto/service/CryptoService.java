@@ -52,10 +52,28 @@ public class CryptoService {
         return cipher.doFinal(data);
     }
 
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(Cipher.ENCRYPT_MODE, key, iv);
 
-            return cipher.doFinal(input);
+    public Mono<String> decryptFile(String fileName) {
+        return Mono.fromCallable(() -> {
+            try {
+
+                Path filePath = Path.of(  fileName);
+                byte[] encryptedBytes = Files.readAllBytes(filePath);
+
+                byte[] decryptedBytes = decryptWithRSA(encryptedBytes, this.privateKey);
+
+                String decryptedText = new String(decryptedBytes, StandardCharsets.UTF_8);
+
+                return decryptedText;
+            } catch (Exception e) {
+                throw new RuntimeException("Error while decrypting the file.", e);
+            }
         });
+    }
+
+    private byte[] decryptWithRSA(byte[] data, RSAPrivateKey privateKey) throws Exception {
+        javax.crypto.Cipher cipher = javax.crypto.Cipher.getInstance(RSA_ALGORITHM);
+        cipher.init(javax.crypto.Cipher.DECRYPT_MODE, privateKey);
+        return cipher.doFinal(data);
     }
 }
