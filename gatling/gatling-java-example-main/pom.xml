@@ -73,8 +73,9 @@
                 <configuration>
                     <simulationsFolder>src/main/java</simulationsFolder>
                     <runMultipleSimulations>false</runMultipleSimulations>
-<!--                    <simulationClass>gatling.test.example.simulation.ExampleSimulation</simulationClass>-->
-                    <simulationClass>gatling.test.crud.CreateTaskSimulation</simulationClass>
+                    <simulationClass>gatling.test.notifications.NotificationSimulation</simulationClass>
+                    <simulationClass>gatling.test.notifications.NotificationWithDelaySimulation</simulationClass>
+                    <simulationClass>gatling.test.notifications.NotificationSseSimulation</simulationClass>
                 </configuration>
             </plugin>
         </plugins>

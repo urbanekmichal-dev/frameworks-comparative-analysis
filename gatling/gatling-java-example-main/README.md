@@ -1,8 +1,24 @@
-# gatling-java-example
+# Tests
 
-[![Build](https://github.com/jecklgamis/gatling-java-example/actions/workflows/build.yml/badge.svg)](https://github.com/jecklgamis/gatling-java-example/actions/workflows/build.yml)
+### Notification
+1. Single notification simulation
+```
+   mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSimulation
+```
+2. Notification with delay simulation
+```
+   mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationWithDelaySimulation
+```
+3. Notification SSE simulation
+```
+   mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+```
+### CRUD
 
-An example Gatling Maven project using Java DSL.
+
+### SORTING
+
+### CRYPTO
 
 ## Building
 
@@ -47,4 +63,3 @@ Run Docker image:
 ```
 make run
 ```
-
