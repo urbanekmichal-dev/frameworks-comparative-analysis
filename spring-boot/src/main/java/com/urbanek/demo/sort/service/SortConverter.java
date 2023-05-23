@@ -17,7 +17,7 @@ public class SortConverter {
     public ListDtoResponse intArrayToListDtoResponse(final int [] array){
         List<Integer> sortedList = Arrays.stream(array).boxed().toList();
         ListDtoResponse listDtoResponse = new ListDtoResponse();
-        listDtoResponse.setIntegerList(sortedList);
+        listDtoResponse.setIntegerListSorted(sortedList);
         return listDtoResponse;
     }
 }
