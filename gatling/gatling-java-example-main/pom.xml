@@ -76,6 +76,8 @@
                     <simulationClass>gatling.test.notifications.NotificationSimulation</simulationClass>
                     <simulationClass>gatling.test.notifications.NotificationWithDelaySimulation</simulationClass>
                     <simulationClass>gatling.test.notifications.NotificationSseSimulation</simulationClass>
+                    <simulationClass>gatling.test.sort.BubbleSortSimulation</simulationClass>
+                    <simulationClass>gatling.test.crypto.EncryptDecryptSimulation</simulationClass>
                 </configuration>
             </plugin>
         </plugins>
