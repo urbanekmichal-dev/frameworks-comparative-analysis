@@ -18,7 +18,7 @@ public class Paths {
 
     //CRYPTO
     public static final String ENCRYPT = "/api/crypto/encryptText";
-    public static final String DECRYTP = "api/crypto/decryptFile/encrypted.txt";
+    public static final String DECRYTP = "api/crypto/decryptFile";
 
 
 }
