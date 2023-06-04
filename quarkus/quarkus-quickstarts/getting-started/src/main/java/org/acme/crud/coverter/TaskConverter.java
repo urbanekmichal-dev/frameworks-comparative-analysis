@@ -10,7 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 public class TaskConverter {
     public TaskDtoResponse convertTaskEntityToTaskDtoResponse(final TaskEntity source){
         final TaskDtoResponse taskDtoResponse = new TaskDtoResponse();
-        taskDtoResponse.setId(source.getId());
+        taskDtoResponse.setTaskId(source.getId());
         taskDtoResponse.setName(source.getName());
         taskDtoResponse.setDescription(source.getDescription());
         return taskDtoResponse;
