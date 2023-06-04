@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 public class TaskDtoResponse {
-    private UUID id;
+    private UUID taskId;
     private String name;
     private String description;
 }

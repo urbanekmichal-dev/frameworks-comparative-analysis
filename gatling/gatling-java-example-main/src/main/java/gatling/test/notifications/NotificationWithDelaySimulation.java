@@ -1,9 +1,9 @@
 package gatling.test.notifications;
 
 import gatling.test.common.Constants;
-import gatling.test.common.Paths;
+import gatling.test.common.*;
 import gatling.test.common.Properties;
-import gatling.test.common.ResponseStatus;
+
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 
@@ -26,11 +26,11 @@ public class NotificationWithDelaySimulation extends Simulation {
                                     )));
 
     {
-        setUp(scenarioBuilder.injectOpen(atOnceUsers(Properties.getNotificationUsers()))).assertions(global().failedRequests()
+        setUp(scenarioBuilder.injectOpen(atOnceUsers(Properties.getUsers()))).assertions(global().failedRequests()
                         .percent()
                         .lt(Constants.SUCCESS_RATE))
                 .protocols(Constants.getHttpProtocolBuilder())
                 .maxDuration(
-                        Duration.ofMinutes(Properties.getNotificationTime()));
+                        Duration.ofMinutes(Properties.getDuration()));
     }
 }

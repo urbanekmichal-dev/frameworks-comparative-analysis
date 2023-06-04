@@ -72,12 +72,7 @@
                 <version>4.2.9</version>
                 <configuration>
                     <simulationsFolder>src/main/java</simulationsFolder>
-                    <runMultipleSimulations>false</runMultipleSimulations>
-                    <simulationClass>gatling.test.notifications.NotificationSimulation</simulationClass>
-                    <simulationClass>gatling.test.notifications.NotificationWithDelaySimulation</simulationClass>
-                    <simulationClass>gatling.test.notifications.NotificationSseSimulation</simulationClass>
-                    <simulationClass>gatling.test.sort.BubbleSortSimulation</simulationClass>
-                    <simulationClass>gatling.test.crypto.EncryptDecryptSimulation</simulationClass>
+                    <runMultipleSimulations>true</runMultipleSimulations>
                 </configuration>
             </plugin>
         </plugins>

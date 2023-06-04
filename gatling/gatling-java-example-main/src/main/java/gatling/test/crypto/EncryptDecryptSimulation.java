@@ -36,8 +36,8 @@ public class EncryptDecryptSimulation extends Simulation {
             );
 
     {
-        setUp(scn.injectOpen(atOnceUsers(250), rampUsers(500).during(Duration.ofMinutes(1)),
-                constantUsersPerSec(30).during(Duration.ofMinutes(2)))).assertions(global().failedRequests()
+        setUp(scn.injectOpen(atOnceUsers(Properties.getUsers()), rampUsers(Properties.getUsers()).during(Duration.ofMinutes(Properties.getDuration())),
+                constantUsersPerSec(Properties.getUsers()).during(Duration.ofMinutes(Properties.getDuration())))).assertions(global().failedRequests()
                         .percent()
                         .lt(Constants.SUCCESS_RATE))
                 .protocols(

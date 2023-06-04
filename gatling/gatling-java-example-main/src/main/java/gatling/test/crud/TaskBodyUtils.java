@@ -3,7 +3,7 @@ package gatling.test.crud;
 public class TaskBodyUtils {
     public static final String TASK_NAME = "name";
     public static final String TASK_DESCRIPTION = "description";
-
+    public static final String TASK_ID = "taskId";
 
     private static final String POST_BODY_TEMPLATE = """
             {
@@ -11,9 +11,18 @@ public class TaskBodyUtils {
             "description": "%s"
             }
             """;
+    private static final String Update_BODY_TEMPLATE = """
+            {
+            "description": "%s"
+            }
+            """;
 
     public static String createTaskBody(final String name, final String description){
         return String.format(POST_BODY_TEMPLATE,name,description);
+    }
+
+    public static String updateTaskBody(final String description){
+        return String.format(Update_BODY_TEMPLATE,description);
     }
 
     public static String generateRandomString(){

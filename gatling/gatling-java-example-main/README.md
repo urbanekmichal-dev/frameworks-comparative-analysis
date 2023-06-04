@@ -1,49 +1,53 @@
 # Tests
 
+Example
+mvn gatling:test -DbaseUrl=http://[address]:[port]/ -DdurationMin=[time] -DrequestPersecond=[quantity] -Dgatling.simulationClass=[simulation class]
+
+
 ### Notification
 1. Single notification simulation
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=5 -Dusers=100 -Dgatling.simulationClass=gatling.test.notifications.NotificationSimulation
 ```
 2. Notification with delay simulation
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationWithDelaySimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=100 -Dgatling.simulationClass=gatling.test.notifications.NotificationWithDelaySimulation
 ```
 3. Notification SSE simulation
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=100 -Dgatling.simulationClass=gatling.test.notifications.NotificationSseSimulation
 ```
 ### CRUD
 1. Create -> Update -> Delete
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -Dusers=200 -Dgatling.simulationClass=gatling.test.crud.CreateUpdateDeleteTaskSimulation 
 ```
 2. Create -> Get -> Delete
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -Dusers=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
 ```
 ### SORTING
 1. Quick-Sort
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=500 -Dgatling.simulationClass=gatling.test.sort.QuickSortSimulation
 ```
 2. Merge-Sort
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=500 -Dgatling.simulationClass=gatling.test.sort.MergeSortSimulation
 ```
 3. Insertion-Sort
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.example.notifications.NotificationSseSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=1000 -Dgatling.simulationClass=gatling.test.sort.InsertionSortSimulation
 ```
 4. Bubble-Sort
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.sort.BubbleSortSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=1000 -Dgatling.simulationClass=gatling.test.sort.BubbleSortSimulation
 ```
   
 ### CRYPTO
 1. Encrypt->Decrypt
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -DrequestPersecond=10 -Dgatling.simulationClass=gatling.test.crypto.EncryptDecryptSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=10 -Dgatling.simulationClass=gatling.test.crypto.EncryptDecryptSimulation
 ```
 
 ## Building

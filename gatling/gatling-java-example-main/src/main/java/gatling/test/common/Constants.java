@@ -9,7 +9,7 @@ public class Constants {
     public static final String ACCEPTED_ENCODINGS = "gzip, deflate, br";
     public static final String USER_AGENT = "PostmanRuntime/7.32.2";
 
-    private static HttpProtocolBuilder HTTP_PROTOCOL =http.baseUrl(Properties.getBaseUrl())
+    public static HttpProtocolBuilder HTTP_PROTOCOL =http.baseUrl(Properties.getBaseUrl())
            .disableCaching()
            .acceptHeader(Headers.Values.APPLICATION_JSON)
            .acceptEncodingHeader(Constants.ACCEPTED_ENCODINGS)

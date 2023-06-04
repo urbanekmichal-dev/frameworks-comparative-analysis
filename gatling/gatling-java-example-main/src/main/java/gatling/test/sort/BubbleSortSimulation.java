@@ -1,9 +1,8 @@
 package gatling.test.sort;
 
 import gatling.test.common.Constants;
-import gatling.test.common.Paths;
 import gatling.test.common.Properties;
-import gatling.test.common.ResponseStatus;
+import gatling.test.common.*;
 import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
@@ -35,12 +34,12 @@ public class BubbleSortSimulation extends Simulation {
     ScenarioBuilder scn = scenario("Bubble-Sort simulation ").exec(bubbleSortingRequest("C:\\Users\\urban\\IdeaProjects\\frameworks-comparative-analysis\\gatling\\gatling-java-example-main\\src\\main\\resources\\test1.csv"));
 
     {
-        setUp(scn.injectOpen(atOnceUsers(Properties.getSortingUsers()))).assertions(global().failedRequests()
+        setUp(scn.injectOpen(atOnceUsers(Properties.getUsers()))).assertions(global().failedRequests()
                         .percent()
                         .lt(Constants.SUCCESS_RATE))
                 .protocols(
                         Constants.getHttpProtocolBuilder())
                 .maxDuration(Duration.ofMinutes(
-                        Properties.getSortingTime()));
+                        Properties.getDuration()));
     }
 }
