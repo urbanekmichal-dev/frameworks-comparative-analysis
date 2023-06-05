@@ -27,7 +27,7 @@ public class EncryptDecryptSimulation extends Simulation {
                     .check(status().is(ResponseStatus.OK))
                     .check(jmesPath("fileName").saveAs(FILE_NAME_ATTRIBUTE))
 
-            ).pause(5, 10)
+            ).pause(0, 1)
             .exec(http("Decrypt message")
                     .get(session -> Paths.DECRYTP + "/" + session.getString(FILE_NAME_ATTRIBUTE))
                     .check(status().is(ResponseStatus.OK))
@@ -36,11 +36,15 @@ public class EncryptDecryptSimulation extends Simulation {
             );
 
     {
-        setUp(scn.injectOpen(atOnceUsers(Properties.getUsers()), rampUsers(Properties.getUsers()).during(Duration.ofMinutes(Properties.getDuration())),
-                constantUsersPerSec(Properties.getUsers()).during(Duration.ofMinutes(Properties.getDuration())))).assertions(global().failedRequests()
+        setUp(scn.injectOpen(
+
+                constantUsersPerSec(Properties.getUsers()).during(Duration.ofMinutes(Properties.getDuration()))))
+                .assertions(global().failedRequests()
                         .percent()
                         .lt(Constants.SUCCESS_RATE))
                 .protocols(
-                        Constants.getHttpProtocolBuilder());
+                        Constants.getHttpProtocolBuilder())
+                .maxDuration(
+                        Duration.ofMinutes(Properties.getDuration()));
     }
 }
