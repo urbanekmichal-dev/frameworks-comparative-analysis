@@ -20,7 +20,7 @@ public class MergeSortSimulation extends Simulation {
     private static ChainBuilder mergeSortingRequest(final String fileName) {
         return exec(feed(csv(fileName).batch(1).random()))
                 .exec(http("Request sorting")
-                        .get(Paths.MERGE_SORT)
+                        .post(Paths.MERGE_SORT)
                         .asJson()
                         .body(StringBody("""
 											  {								 

@@ -19,7 +19,7 @@ public class QuickSortSimulation extends Simulation {
     private static ChainBuilder quickSortingRequest(final String fileName) {
         return exec(feed(csv(fileName).batch(1).random()))
                 .exec(http("Request sorting")
-                        .get(Paths.QUICK_SORT)
+                        .post(Paths.QUICK_SORT)
                         .asJson()
                         .body(StringBody("""
 											  {								 
