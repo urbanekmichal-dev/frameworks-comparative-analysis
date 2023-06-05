@@ -18,7 +18,7 @@ public class InsertionSortSimulation extends Simulation {
     private static ChainBuilder insertionSortingRequest(final String fileName) {
         return exec(feed(csv(fileName).batch(1).random()))
                 .exec(http("Request sorting")
-                        .get(Paths.BUBBLE_SORT)
+                        .post(Paths.BUBBLE_SORT)
                         .asJson()
                         .body(StringBody("""
 											  {								 
