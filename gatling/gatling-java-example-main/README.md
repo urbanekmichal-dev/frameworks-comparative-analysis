@@ -7,7 +7,7 @@ mvn gatling:test -DbaseUrl=http://[address]:[port]/ -DdurationMin=[time] -Dreque
 ### Notification
 1. Single notification simulation
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=5 -Dusers=100 -Dgatling.simulationClass=gatling.test.notifications.NotificationSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=5 -Dusers=500 -Dgatling.simulationClass=gatling.test.notifications.NotificationSimulation
 ```
 2. Notification with delay simulation
 ```
@@ -29,7 +29,7 @@ mvn gatling:test -DbaseUrl=http://localhost:8080/ -DdurationMin=1 -Dusers=10 -Dg
 ### SORTING
 1. Quick-Sort
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=500 -Dgatling.simulationClass=gatling.test.sort.QuickSortSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=5 -Dusers=50000 -Dgatling.simulationClass=gatling.test.sort.QuickSortSimulation
 ```
 2. Merge-Sort
 ```
@@ -47,7 +47,7 @@ mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=1000 -Dga
 ### CRYPTO
 1. Encrypt->Decrypt
 ```
-mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=1 -Dusers=10 -Dgatling.simulationClass=gatling.test.crypto.EncryptDecryptSimulation
+mvn gatling:test -DbaseUrl=http://localhost:8080/ -Dduration=5 -Dusers=10 -Dgatling.simulationClass=gatling.test.crypto.EncryptDecryptSimulation
 ```
 
 ## Building
